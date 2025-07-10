@@ -14,10 +14,14 @@
   }
 }
 
-body {
+body, html {
+  width: 100%;
+  min-height: 100dvh;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin:0px;
+  padding: 0px;
 }
 
 @layer utilities {
