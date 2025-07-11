@@ -1,7 +1,15 @@
 'use client'
 import { useState } from 'react'
 import {  Eye, EyeOff,  } from 'lucide-react';
-export const Input = ({ icon: Icon, type = 'text', placeholder, className = '', ...props }) => {
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  icon?: React.ComponentType<{ className?: string }>;
+  type?: string;
+  placeholder?: string;
+  className?: string;
+}
+
+export const Input = ({ icon: Icon, type = 'text', placeholder, className = '', ...props }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const inputType = type === 'password' && showPassword ? 'text' : type;
   
