@@ -7,7 +7,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     
     if(endpoint == 'register'){
 
-        const res = await axios(url + `/register`, {
+        const res = await axios(`/api/register`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -27,7 +27,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'login'){
 
-        const res = await axios(url +  `/login`, {
+        const res = await axios( `/api/login`, {
             
             method: method || 'POST',
             credentials: 'include',

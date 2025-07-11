@@ -16,7 +16,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   fetchTasks: async (token?: string) => {
     console.log("🚀 ~ fetchTasks: ~ token:", token, localStorage.getItem('token'))
     try {
-      const response = await fetch(uri + '/task', {
+      const response = await fetch('/api/task', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   // Adds a new task
   addTask: async (task) => {
     try {
-      const response = await fetch(uri + '/task', {
+      const response = await fetch('/api/task', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
