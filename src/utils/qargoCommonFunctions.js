@@ -8,7 +8,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     if(endpoint == 'register'){
 
         const res = await axios(`/api/register`, {
-            
+            headers: { 'Content-Type': 'application/json' },
             method: method || 'POST',
             credentials: 'include',
             data: {
@@ -28,7 +28,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     if(endpoint == 'login'){
 
         const res = await axios( `/api/login`, {
-            
+            headers: { 'Content-Type': 'application/json' },
             method: method || 'POST',
             credentials: 'include',
             data: {
@@ -46,7 +46,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'logout'){
         const res = await axios(`/api/logout`, {
-            
+            headers: { 'Content-Type': 'application/json' },
             method: method || 'POST',
             credentials: 'include',
             data: {
@@ -66,7 +66,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     if(endpoint == 'clientes'|| endpoint == 'empleados' ){
 
         const res = await axios(`/api/register`, {
-            
+            headers: { 'Content-Type': 'application/json' },
             method: method || 'POST',
             credentials: 'include',
             data: {

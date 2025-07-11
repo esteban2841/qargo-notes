@@ -45,6 +45,7 @@ export async function middleware (request){
     const isPublicPath = 
     path === '/' 
     || path == '/api/task'
+    || path == '/api/task/*'
     || path == '/api/login'
     || path == '/api/register'
     || path == '/api/logout'
