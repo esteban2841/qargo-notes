@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { TaskStore } from '@/types'; // Make sure to import from your updated types file
 
 const uri = process.env.NEXT_PUBLIC_BACKEND_URI;
+console.log("🚀 ~ uri:", uri)
 
 export const useTaskStore = create<TaskStore>((set, get) => ({
   tasks: [],
