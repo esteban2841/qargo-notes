@@ -1,9 +1,9 @@
 import User from '@/models/User'
 import {dbConnect} from '@/utils/mongodb'
-import { NextResponse, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
 
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   try {
     // Parse the request body as JSON
     const body = await req.json();
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-export async function DELETE(request: NextRequest){
+export async function DELETE(request){
     try{
         await dbConnect()
         const {user} = await request.json()
@@ -58,7 +58,7 @@ export async function DELETE(request: NextRequest){
         return NextResponse.json({error: 'Internal server error'}, {status: 500})
     }
 }
-export async function GET(request: NextRequest){
+export async function GET(request){
     try{
         await dbConnect()
         const url = new URL(request.url);
