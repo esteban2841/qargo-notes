@@ -37,7 +37,7 @@ export async function middleware (request){
     const path = request.nextUrl.pathname;
     const isPublicPath = 
     path === '/' 
-    || path === '/register' 
+    || path === '/api/register' 
     || path === '/catalogo'
     || path == '/api/allProducts'
     || path == '/api/login'

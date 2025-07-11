@@ -7,6 +7,7 @@ const uri = process.env.NEXT_PUBLIC_BACKEND_URI;
 
 export const useTaskStore = create<TaskStore>((set, get) => ({
   tasks: [],
+  filteredTasks: [],
 
   // --- API Interaction Functions ---
 
@@ -19,13 +20,37 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
       }
       const result = await response.json();
       if (result.ok) {
-        set({ tasks: [...result.data] });
+        set({ tasks: [...result.data], filteredTasks: [...result.data] });
       } else {
         console.error('Failed to fetch tasks:', result.message);
       }
     } catch (error) {
       console.error('Error fetching tasks:', error);
       // Handle error, e.g., show a user-friendly message
+    }
+  },
+
+  filterDataTask: async (type: string) => {
+    if(type == 'all'){
+      set((state) => ({
+          filteredTasks: [...state.tasks].map(task =>
+            task
+        ),
+      }));
+    }
+    if(type == 'active'){
+      set((state) => ({
+          filteredTasks: [...state.tasks].filter(task =>
+            task.completed == false
+        ),
+      }));
+    }
+    if(type == 'completed'){
+      set((state) => ({
+          filteredTasks: [...state.tasks].filter(task =>
+            task.completed == true
+        ),
+      }));
     }
   },
 
@@ -49,6 +74,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         // Add the new task (with _id and timestamps from backend) to the store
         set((state) => ({
           tasks: [...state.tasks, result.data],
+          filteredTasks: [...state.tasks, result.data],
         }));
       } else {
         console.error('Failed to add task:', result.message);
@@ -107,6 +133,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         // Remove the task from the store
         set((state) => ({
           tasks: state.tasks.filter(task => task._id !== id),
+          filteredTasks: state.tasks.filter(task => task._id !== id),
         }));
       } else {
         console.error('Failed to delete task:', result.message);
@@ -118,59 +145,83 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
 
   // Toggles the completion status of a task
   toggleComplete: async (task) => {
-    // Optimistic update: Update UI first, then send API request
-    set((state) => ({
-      tasks: state.tasks.map(task =>
-        task._id === task._id
-          ? { ...task, completed: !task.completed, updatedAt: new Date().toISOString() } // Update locally
-          : task
-      ),
-    }));
+  // Optimistic update: Update UI first, then send API request
 
-    const currentTask = get().tasks.find(task => task._id === task._id);
-    if (!currentTask) return;
+  const currentTask = get().tasks.find(tasky => tasky._id === task._id);
+  if (!currentTask) return;
 
-    try {
-      const response = await fetch(`/api/task/${task?._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...currentTask}), // Send the new completed status
-      });
+  try {
+    const response = await fetch(`/api/task/${task?._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Send the updated completed status from currentTask, which now reflects the optimistic update
+      body: JSON.stringify({ completed: !currentTask.completed }),
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-      const result = await response.json();
-      if (!result.ok) {
-        console.error('Failed to toggle completion:', result.message);
-        // Revert optimistic update if API call fails
-        set((state) => ({
-          tasks: state.tasks.map(task =>
-            task._id === task._id
-              ? { ...task, completed: currentTask.completed } // Revert to original
-              : task
-          ),
-        }));
-      }
-      // If successful, the optimistic update is already in place.
-      // If the backend returns the updated task, you could use result.data here
-      // to ensure the local state is perfectly synced with the backend,
-      // especially for `updatedAt` timestamp.
-    } catch (error) {
-      console.error('Error toggling completion:', error);
-      // Revert optimistic update on network error
+    const result = await response.json();
+    if (!result.ok) {
+      console.error('Failed to toggle completion:', result.message);
+      // Revert optimistic update if API call fails
       set((state) => ({
-        tasks: state.tasks.map(task =>
-          task._id === task._id
-            ? { ...task, completed: currentTask.completed }
-            : task
+        tasks: state.tasks.map(tasky =>
+          tasky._id === task._id
+            ? { ...tasky, completed: currentTask.completed } // Revert to original
+            : tasky
+        ),
+        filteredTasks: state.filteredTasks.map(tasky => // Revert filteredTasks as well
+          tasky._id === task._id
+            ? { ...tasky, completed: currentTask.completed }
+            : tasky
         ),
       }));
     }
-  },
+    // If successful, the optimistic update is already in place.
+    // If the backend returns the updated task, you could use result.data here
+    // to ensure the local state is perfectly synced with the backend,
+    // especially for `updatedAt` timestamp.
+    // The previous `set` call for tasks and filteredTasks after the API call is now redundant
+    // because the optimistic update already handled it correctly.
+    // If you need to update with the *server's* returned data (e.g., for `updatedAt` precision),
+    // you would do it here using `result.data`.
+    // Example:
+    if (result.data) {
+      set((state) => ({
+        tasks: state.tasks.map(tasky =>
+          tasky._id === result.data._id
+            ? { ...result.data }
+            : tasky
+        ),
+        filteredTasks: state.filteredTasks.map(tasky =>
+          tasky._id === result.data._id
+            ? { ...result.data }
+            : tasky
+        ),
+      }));
+    }
+
+  } catch (error) {
+    console.error('Error toggling completion:', error);
+    // Revert optimistic update on network error
+    set((state) => ({
+      tasks: state.tasks.map(tasky =>
+        tasky._id === task._id
+          ? { ...tasky, completed: currentTask.completed }
+          : tasky
+      ),
+      filteredTasks: state.filteredTasks.map(tasky => // Revert filteredTasks as well
+        tasky._id === task._id
+          ? { ...tasky, completed: currentTask.completed }
+          : tasky
+      ),
+    }));
+  }
+},
 }));
 
 

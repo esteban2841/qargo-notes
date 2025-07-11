@@ -7,7 +7,47 @@ const url = `${process.env.BACKEND_URI || 'http://localhost:3000/api'}`
 
 
 export const fetchDataSections =  async (url, endpoint, category, authToken, method, rol) => {
+    console.log("🚀 ~ fetchDataSections ~ authToken:", authToken)
     
+    if(endpoint == 'register'){
+
+        const res = await axios(`${url}/register`, {
+            
+            method: method || 'POST',
+            credentials: 'include',
+            data: {
+                ...authToken
+            }
+        },
+        
+    )
+    console.log("🚀 ~ fetchDataSections ~ res:", res)
+    if (res.status !== 200 ) {
+        throw new Error('Failed to fetch data')
+    }
+    
+        
+        return res.data
+    }
+    if(endpoint == 'login'){
+
+        const res = await axios(`${url}/login`, {
+            
+            method: method || 'POST',
+            credentials: 'include',
+            data: {
+                ...authToken
+            }
+        },
+        
+    )
+    if (res.status !== 200 ) {
+        throw new Error('Failed to fetch data')
+    }
+    
+        
+        return res.data
+    }
     if(endpoint == 'logout'){
 
         const res = await axios(`${url}/logout`, {
@@ -25,7 +65,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     
         
-        return res
+        return res.data
     }
     if(endpoint == 'clientes'|| endpoint == 'empleados' ){
 

@@ -15,8 +15,8 @@ const MODELS3D = [
 
 const AuthScreen = () => {
   return (
-      <div className="w-full flex relative h-[100dvh] ">
-        <div className="w-3/4 z-40 absolute flex flex-row items-end h-full justify-end ">
+      <div className="w-full flex flex-col-reverse md:flex-row relative h-[100dvh] ">
+        <div className=" w-full md:w-3/4 z-40 absolute flex flex-row items-center md:items-end h-full justify-center md:justify-end ">
         {MODELS3D.map((model, index)=>{
           return <Object3DRenderer key={index} name={model.name} context={model.context}>
             {model.children}

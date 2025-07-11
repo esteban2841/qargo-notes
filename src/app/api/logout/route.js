@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from 'next/headers'
 
 export async function GET(){
-    const response = new NextResponse(JSON.stringify({ message: 'Cerraste sesion exitosamente' }), {
+    const response = new NextResponse(JSON.stringify({ status:200, message: 'Cerraste sesion exitosamente' }), {
         status: 200,
         headers: {
             'Access-Control-Allow-Origin': '*',

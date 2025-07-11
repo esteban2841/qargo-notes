@@ -35,13 +35,13 @@ export const TaskCard = ({ task, onEdit }: TaskCardProps) => {
       
       <div className="flex items-center justify-between mt-4">
         <div className="text-xs text-gray-500">
-          Created: {task?.createdAt}
+          Created: {task?.createdAt instanceof Date ? task.createdAt.toLocaleString() : String(task?.createdAt)}
         </div>
         <div className="flex space-x-2">
           <Button
             variant="ghost"
             size="sm"
-            onClick={handleToggleComplete}
+            onClick={()=>handleToggleComplete()}
             aria-label={task.completed ? 'Mark as incomplete' : 'Mark as complete'}
           >
             {task.completed ? '↩️' : '✅'}

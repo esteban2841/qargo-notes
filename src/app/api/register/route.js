@@ -8,6 +8,7 @@ export async function POST(request){
     await dbConnect()
     const {email, password, name  } = await request.json();
 
+    console.log("🚀 ~ POST ~ email, password, name:", email, password, name)
 
     try{
         if(!email || !password ) return NextResponse.json({message: 'Por favor provea sus credenciales'})
@@ -25,7 +26,7 @@ export async function POST(request){
         const hashPassword = await bcrypt.hash(password, 10)
         const newUser = new User({email, password: hashPassword, name  })
         await newUser.save();
-        return NextResponse.json({message: 'Perfil Creado', data: newUser}, {status: 200})
+        return NextResponse.json({message: 'Perfil Creado', data: newUser, status: 200}, {status: 200})
 
 
     }catch (error) {

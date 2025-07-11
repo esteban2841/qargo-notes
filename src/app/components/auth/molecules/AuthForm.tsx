@@ -5,6 +5,7 @@ import { Input } from "@/app/components/auth/atoms/Input";
 import { Button } from "@/app/components/auth/atoms/Button";
 import { ChevronRight, Mail, Lock, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { fetchDataSections } from '@/utils/qargoCommonFunctions';
 export const AuthForm = () => {
   const router = useRouter();
   const { isLoginMode, toggleMode } = useContext(QargoCoffeeContext);
@@ -14,59 +15,50 @@ export const AuthForm = () => {
     name: '',
   });
 
-  const handleSubmit = async (e) => {
+  interface AuthFormData {
+    email: string;
+    password: string;
+    name: string;
+  }
+
+  interface ApiResponse {
+    status: number;
+    [key: string]: any;
+  }
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // Handle form submission
     try {
-      const registerResponse = await fetch(
-        isLoginMode ? '/api/login' : '/api/register',
-        {
-          method: 'POST',
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          cache: 'no-cache',
-          body: JSON.stringify(formData)
-        }
-      )
+      console.log("🚀 ~ handleSubmit ~ isLoginMode:", isLoginMode)
+      const registerResponse: ApiResponse = isLoginMode 
+        ? await fetchDataSections('http://localhost:3000/api', 'login', undefined, formData) 
+        : await fetchDataSections('http://localhost:3000/api', 'register', undefined, formData);
+      console.log("🚀 ~ handleSubmit ~ registerResponse:", registerResponse)
       if(registerResponse.status == 200 && !isLoginMode){
-        const loginResponse = await fetch(
-          '/api/login',
-          {
-            method: 'POST',
-            headers:{
-              'Content-Type': 'application/json'
-            },
-            cache: 'no-cache',
-            body: JSON.stringify({
-              email: formData.email, 
-              password: formData.password
-            })
-          }
-        )
+        const loginResponse: ApiResponse = await fetchDataSections('http://localhost:3000/api', 'login', undefined, formData) 
         if(loginResponse.status == 200){
-          const res = await loginResponse.json()
           router.push('/main')
         }
       }
       if(registerResponse.status == 200 && isLoginMode){
-        const res = await registerResponse.json()
         router.push('/main')
       }
-    } catch (error) {
-      console.error("🚀 ~ handleSubmit ~ error:", error)
+    } catch (error: unknown) {
       const errorMessage = (error as any).response?.data?.message || 'Algo salio mal. Por favor intentelo de nuevo'
     }
   };
 
-  const handleInputChange = (e) => {
+  interface InputChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
+
+  const handleInputChange = (e: InputChangeEvent): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 shadow-2xl">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">
+    <div className="flex flex-col gap-2 z-40 md:gap-6 bg-gray-900/95 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 shadow-2xl">
+      <div className="text-center ">
+        <h2 className="text-2xl font-bold text-white ">
           {isLoginMode ? 'Welcome Back' : 'Join QargoNotes'}
         </h2>
         <p className="text-gray-400">
@@ -74,7 +66,7 @@ export const AuthForm = () => {
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-2 md:space-y-6">
         {!isLoginMode && (
           <Input
             icon={User}
@@ -115,19 +107,19 @@ export const AuthForm = () => {
           </div>
         )}
 
-        <Button onClick={handleSubmit} className="w-full">
+        <Button variant='primary' onClick={(e)=>handleSubmit(e)} className="w-full">
           {isLoginMode ? 'Sign In' : 'Create Account'}
           <ChevronRight className="w-4 h-4" />
         </Button>
       </div>
 
-      <div className="mt-8 text-center">
-        <p className="text-gray-400 mb-4">
+      <div className="md:mt-8 text-center">
+        <p className="text-gray-400 ">
           {isLoginMode ? "Don't have an account?" : "Already have an account?"}
         </p>
         <Button
           variant="ghost"
-          onClick={()=>toggleMode(!isLoginMode)}
+          onClick={()=>toggleMode && toggleMode(!isLoginMode)}
           className="w-full"
         >
           {isLoginMode ? 'Create Account' : 'Sign In'}

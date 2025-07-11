@@ -8,7 +8,7 @@ import { Button } from '../atoms/Button';
 import { useTaskStore } from '@/context/tasks/TaskStore';
 
 export const TaskList = () => {
-  const { tasks, fetchTasks } = useTaskStore();
+  const { tasks, fetchTasks, filterDataTask, filteredTasks } = useTaskStore();
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | undefined>();
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
@@ -18,6 +18,12 @@ export const TaskList = () => {
     fetchTasks();
   }, [fetchTasks]);
   
+  const handleFilter = (type: 'all' | 'active' | 'completed')=>{
+    console.log("🚀 ~ handleFilter ~ type:", type)
+    setFilter(type)
+    filterDataTask(type)
+  }
+
   const handleAddTask = () => {
     setEditingTask(undefined);
     setShowForm(true);
@@ -48,7 +54,7 @@ export const TaskList = () => {
             key={filterType}
             variant={filter === filterType ? 'primary' : 'ghost'}
             size="sm"
-            onClick={() => setFilter(filterType)}
+            onClick={() => handleFilter(filterType)}
           >
             {filterType.charAt(0).toUpperCase() + filterType.slice(1)}
           </Button>
@@ -66,8 +72,8 @@ export const TaskList = () => {
         </div>
       ) : (
         <div className="grid gap-4">
-          {tasks.map(task => (
-            <TaskCard key={task.id} task={task} onEdit={handleEditTask} />
+          {filteredTasks.map(task => (
+            <TaskCard key={task._id} task={task} onEdit={handleEditTask} />
           ))}
         </div>
       )}

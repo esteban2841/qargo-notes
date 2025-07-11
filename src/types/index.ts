@@ -11,8 +11,10 @@ export interface Task {
 }
 
 export interface TaskStore {
+  filteredTasks: Task[];
   tasks: Task[];
   fetchTasks: () => void;
+  filterDataTask: (type: string) => void;
   addTask: (task: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateTask: (id: string, updates: Partial<Task>) => void;
   deleteTask: (id: string) => void;

@@ -6,8 +6,6 @@ import { Helmet } from '@/types/helmet'
 import axios from 'axios';
 import { fetchDataSections } from '@/utils/qargoCommonFunctions';
 import { useRouter } from 'next/navigation';
-import { getCurrentUserAction } from "@/app/actions/user";
-import { createRoot } from 'react-dom/client';
 
 export interface SectionRef {
     current: HTMLElement,
@@ -83,8 +81,3 @@ export const QargoCoffeeProvider = ({children}: Props) => {
         </QargoCoffeeContext.Provider>
     )
 }
-
-
-//name company
-
-// safetyradar

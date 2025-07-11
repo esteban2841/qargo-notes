@@ -31,7 +31,7 @@ export async function POST(request){
         }).setProtectedHeader({alg: 'HS256'}).setExpirationTime('1d').sign(jwtSecret);
 
 
-        const response = new NextResponse(JSON.stringify({payload: token, userId: token.userId, message: 'Éxito' }), {
+        const response = new NextResponse(JSON.stringify({payload: token, userId: token.userId, message: 'Éxito', status: 200 }), {
             status: 200,
             headers: {
                 'Access-Control-Allow-Origin': '*',
