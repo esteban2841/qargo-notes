@@ -1,11 +1,10 @@
 // pages/api/task/index.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
 import {dbConnect} from '@/utils/mongodb';
 import Task from '@/models/Task';
 import { getCurrentUserAction } from '@/app/actions/user';
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest, response: NextResponse) {
+export async function GET(request: NextRequest) {
     try{
         await dbConnect()
         const token = await getCurrentUserAction()
@@ -17,7 +16,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         return NextResponse.json({message: 'Error recuperando la informacion del usuario', status: 500})
     }
 }
-export async function POST(request: NextRequest, response: NextResponse){
+export async function POST(request: NextRequest){
     try{
         await dbConnect()
         const token = await getCurrentUserAction()
