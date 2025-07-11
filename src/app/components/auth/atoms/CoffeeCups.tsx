@@ -3,10 +3,10 @@
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 
-export function CoffeeCups(props: any) {
+export function CoffeeCups() {
   const { nodes, materials } = useGLTF('/models/coffee/scene.gltf')
   return (
-    <group {...props} dispose={null}>
+    <group  dispose={null}>
       <group scale={0.01}>
         <mesh
           castShadow
