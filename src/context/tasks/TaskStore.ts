@@ -1,7 +1,7 @@
 // store/taskStore.ts
 'use client'
 import { create } from 'zustand';
-import { Task, TaskStore } from '@/types'; // Make sure to import from your updated types file
+import { TaskStore } from '@/types'; // Make sure to import from your updated types file
 
 const uri = process.env.NEXT_PUBLIC_BACKEND_URI;
 
