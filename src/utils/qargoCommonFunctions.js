@@ -1,10 +1,5 @@
 import axios from 'axios'
 
-const url = `${process.env.BACKEND_URI || 'http://localhost:3000/api'}`
-
-
-
-
 
 export const fetchDataSections =  async (url, endpoint, category, authToken, method, rol) => {
     console.log("🚀 ~ fetchDataSections ~ authToken:", authToken)
