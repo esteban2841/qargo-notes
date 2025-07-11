@@ -23,6 +23,7 @@ export async function POST(req) {
         return response // Replace with actual user data
   } catch (error) {
     // Log the error for debugging purposes
+    console.error(error)
     return NextResponse.json({ error: 'Failed to create user.' }, { status: 500 });
   }
 }
