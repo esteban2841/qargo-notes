@@ -108,6 +108,11 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
               ? { ...task, ...result.data } // Use data from backend to ensure consistency
               : task
           ),
+          filteredTasks: state.tasks.map(task =>
+            task._id === id
+              ? { ...task, ...result.data } // Use data from backend to ensure consistency
+              : task
+          ),
         }));
       } else {
         console.error('Failed to update task:', result.message);
