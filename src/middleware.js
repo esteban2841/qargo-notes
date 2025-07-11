@@ -41,15 +41,9 @@ export async function middleware (request){
     const isPublicPath = 
     path === '/' 
     || path === '/api/register' 
-    || path === '/catalogo'
-    || path == '/api/allProducts'
     || path == '/api/login'
-    || path == '/api/getCurrentUserAction'
-    || path == '/api/sales'
+    || path == '/api/logout'
     || path == '/api/task'
-    || path == '/api/getProductsByReferenceAndName'
-    || path == '/api/user'
-    || path ===  '/catalogo/:category*';
     
     const tokenFromCookie = request.cookies.get('authToken')?.value;
     const authHeader = request.headers.get('Authorization');
@@ -88,10 +82,6 @@ export const config = {
     matcher: [
         '/',
         '/api/:path*',
-        '/catalogo',
-        '/api/catalogo',
-        '/catalogo/:path',
-        '/register',
         '/main',
     ]
 }

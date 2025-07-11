@@ -6,6 +6,7 @@ import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
 const secret = process.env.SECRET
+console.log("🚀 ~ cookies ~ process.env.PROD_DOMAIN:", process.env.PROD_DOMAIN)
 
 export async function POST(request){
     
