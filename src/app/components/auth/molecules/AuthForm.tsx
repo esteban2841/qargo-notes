@@ -44,9 +44,8 @@ export const AuthForm = () => {
     }
   };
 
-  interface InputChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
 
-  const handleInputChange = (e: InputChangeEvent): void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
