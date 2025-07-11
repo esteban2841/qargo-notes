@@ -7,7 +7,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     
     if(endpoint == 'register'){
 
-        const res = await axios(`${url}/register`, {
+        const res = await axios(`/register`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -27,7 +27,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'login'){
 
-        const res = await axios(`${url}/login`, {
+        const res = await axios(`/login`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -46,7 +46,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'logout'){
 
-        const res = await axios(`${url}/logout`, {
+        const res = await axios(`/logout`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -65,7 +65,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'clientes'|| endpoint == 'empleados' ){
 
-        const res = await axios(`${url}/register`, {
+        const res = await axios(`/register`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -85,7 +85,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'user'){
         
-        const res = await axios(`${url}/${endpoint}`, {
+        const res = await axios(`/${endpoint}`, {
             params: {
 
                 rol
