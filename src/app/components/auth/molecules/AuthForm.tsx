@@ -1,3 +1,4 @@
+// @typescript-eslint/no-explicit-any
 'use client'
 import {QargoCoffeeContext} from '@/context'
 import { useContext, useState } from 'react'
@@ -17,7 +18,7 @@ export const AuthForm = () => {
 
   interface ApiResponse {
     status: number;
-    [key: string]: unknown;
+    [key: string]: any;
   }
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,14 +40,8 @@ export const AuthForm = () => {
         router.push('/main')
       }
     } catch (error: unknown) {
-      let errorMessage = 'Algo salio mal. Por favor intentelo de nuevo';
-      if (error && typeof error === 'object' && 'response' in error) {
-        const err = error as { response?: { data?: { message?: string } } };
-        errorMessage = err.response?.data?.message || errorMessage;
-      }
-      // Optionally, you can display the error message here using a state variable
-      // For now, just log it
-      console.error(errorMessage);
+      const errorMessage = (error as any).response?.data?.message || 'Algo salio mal. Por favor intentelo de nuevo'
+      return errorMessage
     }
   };
 
