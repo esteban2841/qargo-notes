@@ -2,7 +2,9 @@ import { jwtVerify } from "jose";
 import { NextResponse } from "next/server";
 
 const allowedOrigins = [
-    '*'
+    '*',
+    'https://qargo-coffee.vercel.app',
+    'qargo-coffee.vercel.app'
     // Puerto común para desarrollo de React Native
 ];
 const secret = new TextEncoder().encode(process.env.SECRET)
