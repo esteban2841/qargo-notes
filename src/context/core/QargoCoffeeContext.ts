@@ -13,22 +13,22 @@ export interface User {
 
 export interface QargoCoffeeContext {
     
-    [key: string]: unknown;
+    [key: string]: any;
     //helmet animation handlers
     isLoginMode: boolean,
     helmet: Helmet
-    toggleRotation?: (payload: unknown) => void
+    toggleRotation?: (payload: any) => void
 
 
     //user actions login and register
     usuario?: User
-    fetchUsuario?: (payload: unknown) => void
+    fetchUsuario?: (payload: any) => void
 
 
-    setUserLogged?: (payload: unknown) => void
-    logout?: (payload: unknown) => void
+    setUserLogged?: (payload: any) => void
+    logout?: (payload: any) => void
     
-    toggleMode?: (payload: unknown) => void
+    toggleMode?: (payload: any) => void
     
 }
 

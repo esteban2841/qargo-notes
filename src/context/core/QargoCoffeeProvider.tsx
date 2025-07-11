@@ -34,7 +34,7 @@ export const QargoCoffeeProvider = ({children}: Props) => {
     const [state, dispatch] = useReducer(qargoCoffeeReducer, INITIAL_STATE)
     
     
-    const fetchUsuario = async (payload: QargoCoffeeContext) =>{
+    const fetchUsuario = async () =>{
         try {
             const response = await axios.get('api/user')
             if(response.data){
