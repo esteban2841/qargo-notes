@@ -18,7 +18,7 @@ export async function middleware (request){
 
     // Set CORS headers for all valid requests (including preflight and actual requests)
     const corsHeaders = {
-        'Access-Control-Allow-Origin': origin && allowedOrigins ? origin : (process.env.NODE_ENV === 'development' ? '*' : 'https://qargo-coffee.vercel.app'),
+        'Access-Control-Allow-Origin': origin && allowedOrigins ? origin : (process.env.NODE_ENV === 'development' ? '*' : 'qargo-coffee.vercel.app'),
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true',
