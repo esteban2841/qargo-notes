@@ -1,5 +1,5 @@
 import {dbConnect} from '@/utils/mongodb'
-import { NextResponse, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getCurrentUserAction } from "@/app/actions/user";
 
 

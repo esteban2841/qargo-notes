@@ -1,11 +1,10 @@
 // pages/api/task/[id].ts
-import type { NextApiRequest, NextApiResponse } from 'next';
 import {dbConnect} from '@/utils/mongodb';
 import Task from '@/models/Task';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUserAction } from '@/app/actions/user';
 
-export async function DELETE(request, response){
+export async function DELETE(request: NextRequest){
   try{
     await dbConnect()
         const _id = request.url.split("/").pop();
@@ -15,10 +14,10 @@ export async function DELETE(request, response){
         return response
     } catch (error) {
         console.error(error)
-        return response.json({message: 'Error recuperando la informacion del usuario', status: 500})
+        return NextResponse.json({message: 'Error recuperando la informacion del usuario', status: 500})
     }
 }
-export async function PUT(request, response){
+export async function PUT(request: NextRequest){
     try{
         await dbConnect()
         const _id = request.url.split("/").pop();
@@ -40,7 +39,7 @@ export async function PUT(request, response){
         return response
     } catch (error) {
         console.error(error)
-        return response.json({message: 'Error recuperando la informacion del usuario', status: 500})
+        return NextResponse.json({message: 'Error recuperando la informacion del usuario', status: 500})
     }
 }
 
