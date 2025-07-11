@@ -101,7 +101,7 @@ export const AuthForm = () => {
           </div>
         )}
 
-        <Button variant='primary' onClick={(e)=>handleSubmit(e)} className="w-full">
+        <Button variant='primary' onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)} className="w-full">
           {isLoginMode ? 'Sign In' : 'Create Account'}
           <ChevronRight className="w-4 h-4" />
         </Button>

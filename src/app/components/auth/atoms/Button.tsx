@@ -4,7 +4,7 @@ interface ButtonProps {
     children: ReactNode,
     variant: 'primary' | 'secondary' | 'ghost',
     className?: string,
-    onClick?: ((e: unknown) => Promise<void> | void )
+    onClick?: ((e: React.MouseEvent<HTMLButtonElement>) => Promise<void> | void )
 }
 
 export const Button = ({ children, variant = 'primary', onClick, className = '', ...props }: ButtonProps) => {
