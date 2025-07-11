@@ -2,7 +2,7 @@
 import { useContext } from "react"
 import { Button } from "../../auth/atoms/Button"
 import { Logo } from "../../auth/atoms/Logo"
-import { QargoCoffeeContext } from "@/context"
+import { QargoCoffeeContext } from "../../../../context"
 
 export const NavBar = () => {
 

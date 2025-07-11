@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Task } from '@/types';
 import { Button } from '../atoms/Button';
 import { Input } from '../atoms/Input';
-import { useTaskStore } from '@/context/tasks/TaskStore';
+import { useTaskStore } from '../../../../context/tasks/TaskStore';
 
 interface TaskFormProps {
   task?: Task;

@@ -3,7 +3,7 @@
 import { Task } from '@/types';
 import { Button } from '../atoms/Button';
 import { Badge } from '../atoms/Badge';
-import { useTaskStore } from '@/context/tasks/TaskStore';
+import { useTaskStore } from '../../../../context/tasks/TaskStore';
 
 interface TaskCardProps {
   task: Task;

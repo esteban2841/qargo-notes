@@ -5,7 +5,7 @@ import { Canvas} from "@react-three/fiber"
 import styled from "styled-components";
 import { Suspense, useRef, useContext, RefObject } from "react";
 import { Loader } from "../atoms/Loader";
-import { QargoCoffeeContext } from "@/context";
+import { QargoCoffeeContext } from "../../../../context";
 
 const ThreeDimentionContainerRenderer = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { QargoCoffeeProvider } from '@/context'
+import { QargoCoffeeProvider } from '../context'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

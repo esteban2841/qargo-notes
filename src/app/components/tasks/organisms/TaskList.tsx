@@ -5,7 +5,7 @@ import { Task } from '@/types';
 import { TaskCard } from '../molecules/TaskCard';
 import { TaskForm } from '../molecules/TaskForm';
 import { Button } from '../atoms/Button';
-import { useTaskStore } from '@/context/tasks/TaskStore';
+import { useTaskStore } from '../../../../context/tasks/TaskStore';
 
 export const TaskList = () => {
   const { tasks, fetchTasks, filterDataTask, filteredTasks } = useTaskStore();
