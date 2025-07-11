@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { fetchDataSections } from '../../../../utils/qargoCommonFunctions';
 
 const uri = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
-console.log("🚀 ~ uri:", uri)
+console.log("🚀 ~ uri updated:", uri)
 
 export const AuthForm = () => {
   const router = useRouter();
