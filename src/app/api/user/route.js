@@ -23,22 +23,7 @@ export async function POST(req) {
         return response // Replace with actual user data
   } catch (error) {
     // Log the error for debugging purposes
-    console.error('Error in POST /api/user:', error);
-
-    // Handle different types of errors if necessary
-    if (error instanceof SyntaxError) {
-      // If the request body is not valid JSON
-      return NextResponse.json(
-        { message: 'Invalid JSON in request body.' },
-        { status: 400 }
-      );
-    }
-
-    // For any other unexpected errors, return a 500 Internal Server Error
-    return NextResponse.json(
-      { message: 'An unexpected error occurred.' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create user.' }, { status: 500 });
   }
 }
 export async function DELETE(request){
@@ -55,7 +40,7 @@ export async function DELETE(request){
 
     }catch (error) {
         console.error(error)
-        return NextResponse.json({error: 'Internal server error'}, {status: 500})
+        return NextResponse.json({ error: 'Failed to delete user.' }, { status: 500 });
     }
 }
 export async function GET(request){
@@ -71,7 +56,7 @@ export async function GET(request){
         return response
     } catch (error) {
         console.error(error)
-        return NextResponse.json({message: 'Error recuperando la informacion del usuario', status: 500})
+        return NextResponse.json({ error: 'Failed to get user.' }, { status: 500 });
     }
 }
 
