@@ -1,6 +1,5 @@
 import { jwtVerify } from "jose";
 import { NextResponse } from "next/server";
-import { NextRequest } from 'next/server';
 
 const allowedOrigins = [
     'https://qargonotes.shop', // Dominio de tu aplicación web Next.js
@@ -81,6 +80,7 @@ export async function middleware (request){
             }
 
         } catch (error) {
+            console.error("🚀 ~ middleware ~ error:", error)
             return NextResponse.redirect(new URL('/', request.url))
         }
     }
