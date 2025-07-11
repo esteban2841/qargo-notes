@@ -2,6 +2,7 @@ import axios from 'axios'
 
 
 export const fetchDataSections =  async (url, endpoint, category, authToken, method, rol) => {
+    console.log("🚀 ~ fetchDataSections ~ url:", url)
     console.log("🚀 ~ fetchDataSections ~ authToken:", authToken)
     
     if(endpoint == 'register'){
