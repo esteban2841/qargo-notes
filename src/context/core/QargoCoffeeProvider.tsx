@@ -52,11 +52,9 @@ export const QargoCoffeeProvider = ({children}: Props) => {
         
     }
     const logout = async (payload: QargoCoffeeContext) =>{
-        await fetchDataSections(NEXT_PUBLIC_BACKEND_URI, 'logout', undefined, undefined, 'GET', undefined)
-        dispatch({type:'logout', payload: payload})
-        
+        const res = await fetchDataSections(NEXT_PUBLIC_BACKEND_URI, 'logout', undefined, undefined, 'GET', undefined)
+        console.log("🚀 ~ logout ~ res:", res)
         router.push('/')
-        
         
     }
     const toggleMode = async (payload: QargoCoffeeContext) =>{
