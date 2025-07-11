@@ -48,7 +48,7 @@ export async function POST(request){
             maxAge: 60 * 60 * 24, // 1 día
             path: '/',
             // En desarrollo:
-            domain: process.env.NODE_ENV === 'production' ? 'qargo-coffee.vercel.app' : undefined ,
+            domain: process.env.NODE_ENV === 'production' ? process.env.PROD_DOMAIN : undefined ,
             
             
             // No especificar domain para localhost

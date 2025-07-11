@@ -13,7 +13,7 @@ export async function GET(){
 
 
     cookies().set('authToken', '', {
-        domain: process.env.NODE_ENV === 'production' ? 'qargo-coffee.vercel.app' : undefined ,
+        domain: process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BASE_URL : undefined ,
         expires: new Date(0), // Expire immediately
         path: '/',
         httpOnly: true,
