@@ -6,28 +6,26 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request){
     await dbConnect()
-    const { user } = await request.json();
-    const {correo, contraseña, usuario, nombre, apellido, celular, direccion, ciudad, departamento, cedula, rol } = user || await request.json();
+    const {email, password, name  } = await request.json();
 
-    const role = rol || user.rol || 'usuario'
 
     try{
-        if(!correo || !contraseña || !usuario) return NextResponse.json({message: 'Por favor provea sus credenciales'})
+        if(!email || !password ) return NextResponse.json({message: 'Por favor provea sus credenciales'})
         
-        if(!/^\S+@\S+\.\S+$/.test(correo)){
+        if(!/^\S+@\S+\.\S+$/.test(email)){
             return NextResponse.json({
-                message: 'Formato de correo electronico invalido'
+                message: 'Formato de email electronico invalido'
             }, {status: 400})
         }
 
-        const user = await User.findOne({correo})
+        const user = await User.findOne({email})
 
-        if(user) return NextResponse.json({message: 'Ya existe una cuenta con tu correo electronico'}, {status: 500})
+        if(user) return NextResponse.json({message: 'Ya existe una cuenta con tu email electronico'}, {status: 500})
 
-        const hashPassword = await bcrypt.hash(contraseña, 10)
-        const newUser = new User({correo, contraseña: hashPassword, usuario, nombre, apellido, celular, direccion, ciudad, departamento, cedula, rol: role})
+        const hashPassword = await bcrypt.hash(password, 10)
+        const newUser = new User({email, password: hashPassword, name  })
         await newUser.save();
-        return NextResponse.json({message: 'Perfil Creado'}, {status: 200})
+        return NextResponse.json({message: 'Perfil Creado', data: newUser}, {status: 200})
 
 
     }catch (error) {

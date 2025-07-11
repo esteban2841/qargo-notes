@@ -1,11 +1,12 @@
 'use client'
 import {QargoCoffeeContext} from '@/context'
 import { useContext, useState } from 'react'
-import { Input } from "@/app/components/atoms/Input";
-import { Button } from "@/app/components/atoms/Button";
+import { Input } from "@/app/components/auth/atoms/Input";
+import { Button } from "@/app/components/auth/atoms/Button";
 import { ChevronRight, Mail, Lock, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 export const AuthForm = () => {
+  const router = useRouter();
   const { isLoginMode, toggleMode } = useContext(QargoCoffeeContext);
   const [formData, setFormData] = useState({
     email: '',
@@ -14,10 +15,9 @@ export const AuthForm = () => {
   });
 
   const handleSubmit = async (e) => {
-    const router = useRouter();
     e.preventDefault();
     // Handle form submission
-        try {
+    try {
       const registerResponse = await fetch(
         isLoginMode ? '/api/login' : '/api/register',
         {
@@ -29,7 +29,7 @@ export const AuthForm = () => {
           body: JSON.stringify(formData)
         }
       )
-      if(registerResponse.status == 200){
+      if(registerResponse.status == 200 && !isLoginMode){
         const loginResponse = await fetch(
           '/api/login',
           {
@@ -45,14 +45,18 @@ export const AuthForm = () => {
           }
         )
         if(loginResponse.status == 200){
-          await loginResponse.json()
-          router.push('/')
+          const res = await loginResponse.json()
+          router.push('/main')
         }
       }
+      if(registerResponse.status == 200 && isLoginMode){
+        const res = await registerResponse.json()
+        router.push('/main')
+      }
     } catch (error) {
+      console.error("🚀 ~ handleSubmit ~ error:", error)
       const errorMessage = (error as any).response?.data?.message || 'Algo salio mal. Por favor intentelo de nuevo'
     }
-    console.log('Form submitted:', formData);
   };
 
   const handleInputChange = (e) => {

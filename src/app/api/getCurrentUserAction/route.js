@@ -21,9 +21,7 @@ export async function GET(request, response){
         } else if (tokenFromCookie) {
             token = tokenFromCookie;
         }
-        console.log("🚀 ~ GET ~ token:", token)
         const user = await getCurrentUserAction(token)
-        console.log("🚀 ~ GET ~ user:", user)
         const origin = request.headers.get('origin');
         const allowedOrigins = [
             'http://localhost:8081',

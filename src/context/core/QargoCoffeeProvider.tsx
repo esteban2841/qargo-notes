@@ -19,9 +19,9 @@ const INITIAL_STATE: QargoCoffeeContext = {
     isLoginMode: true,
     usuario: {
         _id: "",
-        nombre: '',
-        contraseña: '',
-        correo: '',
+        name: '',
+        password: '',
+        email: '',
     },
 }
 
@@ -63,7 +63,6 @@ export const QargoCoffeeProvider = ({children}: Props) => {
         
     }
     const toggleMode = async (payload: QargoCoffeeContext) =>{
-        console.log("🚀 ~ toggleMode ~ payload:", payload)
         dispatch({type:'toggleMode', payload: payload})
         
         router.push('/')

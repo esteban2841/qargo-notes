@@ -67,32 +67,6 @@ export async function PUT(request, response){
         const {userInfo, pedido, payment, key} = await request.json();
 
 
-        if(key == "editForm"){
-
-            const userBeforeModified = await User.findOne({email: userInfo.email}).lean()
-            console.log("TCL: PUT -> userBeforeModified", userBeforeModified)
-            const contraseñaDb = userBeforeModified.contraseña
-            
-            if(!userBeforeModified) NextResponse.json({message: 'Credenciales invalidas'})
-                
-            console.log("TCL: PUT -> contraseñaDb", contraseñaDb, userInfo.contraseña)
-            const isPasswordValid = await bcrypt.compare(userInfo.contraseña, contraseñaDb)
-			console.log("TCL: PUT -> isPasswordValid", isPasswordValid)
-    
-            if(!isPasswordValid) return NextResponse.json({message: 'Credenciales invalidas'}, {status: 400})
-            
-            const hashPassword = await bcrypt.hash(userInfo.nuevaContraseña || userInfo.contraseña, 10)
-            const userModified = await User.findOneAndUpdate({_id: userInfo._id}, {
-                ...userInfo,
-                contraseña: hashPassword 
-            }, {
-                new: true
-            })
-            console.log("TCL: PUT -> userModified", userModified)
-            const response = NextResponse.json({userModified, message: 'Usuario modificado con exito'})
-            return response
-        }
-
         const nuevoPedido = {
             paymentId: payment.paymentId,
             date_approved: payment.date_approved,
@@ -104,7 +78,6 @@ export async function PUT(request, response){
             ]
         }
         
-        console.log("TCL: PUT -> nuevoPedido", nuevoPedido)
     
         if (!userInfo && !pedido) {
             return { error: 'No hay informacion del pagador ni de los productos', status: 401 };
@@ -112,12 +85,10 @@ export async function PUT(request, response){
       
           // Verify the token
         const userBeforeModified = await User.findOne({email: userInfo.email}).lean()
-		console.log("TCL: PUT -> userBeforeModified", userBeforeModified)
 
         const {pedidos} = userBeforeModified
 
         const anterioresPedidos = pedidos && pedidos.length ? [...pedidos] : [] 
-		console.log("TCL: PUT -> pedidos", anterioresPedidos)
 
         const userModified = await User.findOneAndUpdate({_id: userBeforeModified._id}, {
             pedidos: [
@@ -127,7 +98,6 @@ export async function PUT(request, response){
         }, {
             new: true
         })
-        console.log("TCL: PUT -> userModified", userModified)
         const response = NextResponse.json({userModified, message: 'Usuario modificado con exito'})
         return response
     } catch (error) {

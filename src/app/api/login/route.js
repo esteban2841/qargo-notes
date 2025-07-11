@@ -14,7 +14,7 @@ export async function POST(request){
         const {email, password} = await request.json();
         if(!email || !password) NextResponse.json({message: 'Por favor provea sus credenciales'})
 
-        const user = await User.findOne({email}).lean()
+        const user = await User.findOne({email})
         const passwordDb = user.password
 
         if(!user) NextResponse.json({message: 'Credenciales invalidas'})
@@ -27,11 +27,11 @@ export async function POST(request){
         const token = await new SignJWT({
             userId: user._id,
             email: user.email,
+            user_id: user._id.toString(),
         }).setProtectedHeader({alg: 'HS256'}).setExpirationTime('1d').sign(jwtSecret);
 
-        console.log(`Token size: ${token.length} bytes`);
 
-        const response = new NextResponse(JSON.stringify({rol: token, message: 'Éxito' }), {
+        const response = new NextResponse(JSON.stringify({payload: token, userId: token.userId, message: 'Éxito' }), {
             status: 200,
             headers: {
                 'Access-Control-Allow-Origin': '*',

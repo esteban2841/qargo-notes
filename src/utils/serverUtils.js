@@ -2,7 +2,6 @@
 
 import { cookies } from 'next/headers'
 import { jwtVerify } from 'jose'
-import Product from "@/models/Product"
 import User from '@/models/User'
 
 
@@ -21,7 +20,6 @@ export async function getCurrentUser(tokenQuery) {
     try {
       // 3. Verificar el token JWT
       const { payload } = await jwtVerify(token, encodedKey)
-			console.log("TCL: getCurrentUser -> payload", payload)
       
       // 4. Retornar los datos del usuario del payload
       return payload
@@ -31,26 +29,10 @@ export async function getCurrentUser(tokenQuery) {
       return null
     }
   }
-export async function getProductsById(products) {
-    try {
-      const productsExtended = await Promise.all(products.map(async (prod, index)=>{
-        const product = await Product.findById(prod).lean() 
-        return product
-      }))
-      
-      // 4. Retornar los datos del usuario del payload
-      return productsExtended
-    } catch (error) {
-      // 5. Manejar errores de verificación
-      console.error('Error retrieving products:', error)
-      return null
-    }
-  }
 export async function getUserById(user) {
     try {
       const userExtended = await User.findById(user).lean() 
       delete userExtended.password
-			console.log("TCL: getUserById -> userExtended", userExtended)
       
       return userExtended
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Logo } from "@/app/components/atoms/Logo";
+import { Logo } from "@/app/components/auth/atoms/Logo";
 
 export const Hero = () => (
   <div className="flex-1 flex flex-col justify-center px-8 lg:px-16">

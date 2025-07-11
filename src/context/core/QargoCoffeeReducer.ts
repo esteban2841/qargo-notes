@@ -1,5 +1,4 @@
 import { QargoCoffeeContext } from './QargoCoffeeContext';
-import { Product } from '@/types/product';
 
 export const qargoCoffeeReducer = (state: QargoCoffeeContext, action: any) : QargoCoffeeContext => {
     switch (action.type) {
@@ -19,28 +18,21 @@ export const qargoCoffeeReducer = (state: QargoCoffeeContext, action: any) : Qar
                 ...state,
                 usuario: action.payload
             }
-            case 'logout':
+        case 'logout':
                 
             
 
             return {
                 ...state,
                 usuario: {
-                    usuario: '',
-                    contraseña: '',
-                    correo: '',
-                    celular: '',
-                    direccion: '',
-                    ciudad: { id: 0, name: '' },
-                    departamento: { id: 0, name: '' },
-                    nombre: '',
-                    apellido: '',
-                    cedula: ''
+                    password: '',
+                    email: '',
+                    name: '',
                 }
             }
             
             
-            default:
+        default:
             return state
     } 
 }

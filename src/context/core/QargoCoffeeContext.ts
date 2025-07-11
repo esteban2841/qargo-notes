@@ -4,18 +4,18 @@ import { Helmet } from '@/types/helmet'
 
 export interface User {
     _id?: string
-    usuario: string
-    contraseña: string
-    correo: string,
-    isLoginMode: boolean,
+    name: string
+    password: string
+    email: string,
 }
 
 
 
 export interface QargoCoffeeContext {
-
+    
     [key: string]: any;
     //helmet animation handlers
+    isLoginMode: boolean,
     helmet: Helmet
     toggleRotation?: (payload: any) => void
 

@@ -27,12 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} relative w-full h-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable}  relative w-full  antialiased`}
       >
-        <QargoCoffeeProvider>
+        <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full h-full">
 
-          {children}
-        </QargoCoffeeProvider>
+          <QargoCoffeeProvider>
+
+            {children}
+          </QargoCoffeeProvider>
+        </div>
       </body>
     </html>
   );
