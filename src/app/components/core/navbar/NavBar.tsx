@@ -10,7 +10,9 @@ export const NavBar = () => {
 
     const handleLogout = () => {
         // Implement logout logic here
-        logout && logout('');
+        if (logout) {
+            logout({});
+        }
     };
   return (
     <nav className="w-full h-20 flex justify-between items-center bg-gray-900 border-b border-gray-700 p-4">

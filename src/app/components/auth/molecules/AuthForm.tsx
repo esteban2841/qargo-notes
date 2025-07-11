@@ -1,4 +1,3 @@
-// @typescript-eslint/no-explicit-any
 'use client'
 import {QargoCoffeeContext} from '@/context'
 import { useContext, useState } from 'react'
