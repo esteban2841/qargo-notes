@@ -1,4 +1,3 @@
-import { QargoCoffeeProvider } from "@/context";
 import type { Metadata } from "next";
 import { NavBar } from "../components/core/navbar/NavBar";
 export const metadata: Metadata = {

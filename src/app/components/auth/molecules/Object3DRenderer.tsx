@@ -3,7 +3,7 @@
 import {  OrbitControls, Stage } from "@react-three/drei";
 import { Canvas} from "@react-three/fiber"
 import styled from "styled-components";
-import { Suspense, useRef, useContext } from "react";
+import { Suspense, useRef, useContext, RefObject } from "react";
 import { Loader } from "../atoms/Loader";
 import { QargoCoffeeContext } from "@/context";
 
@@ -34,7 +34,7 @@ interface Object3DRendererProps {
 }
 
 export const Object3DRenderer = ({children, context, name}: Object3DRendererProps) => {
-    const ref = useRef()
+    const ref = useRef<HTMLElement>()
     const { helmet } = useContext(QargoCoffeeContext)
     const isContextNeeded = context
     const { autoRotate } = helmet
@@ -48,7 +48,7 @@ export const Object3DRenderer = ({children, context, name}: Object3DRendererProp
                 {children}
             </Stage>
         </Suspense>
-        <OrbitControls ref={ref as any} makeDefault={!isContextNeeded} 
+        <OrbitControls ref={ref as RefObject<any>} makeDefault={!isContextNeeded} 
           autoRotate={autoRotate && isContextNeeded}  autoRotateSpeed={6}/>
         </Canvas>
     </ThreeDimentionContainerRenderer>
