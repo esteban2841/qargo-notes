@@ -45,7 +45,6 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
         return res.data
     }
     if(endpoint == 'logout'){
-
         const res = await axios(`/api/logout`, {
             
             method: method || 'POST',
@@ -60,6 +59,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
         throw new Error('Failed to fetch data')
     }
     
+        localStorage.removeItem('token')
         
         return res.data
     }

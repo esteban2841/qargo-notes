@@ -36,10 +36,12 @@ export const AuthForm = () => {
       if(registerResponse.status == 200 && !isLoginMode){
         const loginResponse: ApiResponse = await fetchDataSections(uri, 'login', undefined, formData) 
         if(loginResponse.status == 200){
+          localStorage.setItem('token', registerResponse.payload);
           router.push('/main')
         }
       }
       if(registerResponse.status == 200 && isLoginMode){
+        localStorage.setItem('token', registerResponse.payload);
         router.push('/main')
       }
     } catch (error: unknown) {

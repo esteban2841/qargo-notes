@@ -10,10 +10,11 @@ const encodedKey = new TextEncoder().encode(secretKey)
 
 
 export async function getCurrentUser(tokenQuery) {
+    console.log("🚀 ~ getCurrentUser ~ tokenQuery:", tokenQuery)
     // 1. Obtener la cookie
     const cookieStore = cookies()
-    const token = tokenQuery || cookieStore.get('authToken')?.value
-    
+    const token = cookieStore.get('authToken')?.value || tokenQuery
+
     // 2. Si no hay token, retornar null
     if (!token) return null
     

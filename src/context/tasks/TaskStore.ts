@@ -13,9 +13,16 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   // --- API Interaction Functions ---
 
   // Fetches all tasks for the current user
-  fetchTasks: async () => {
+  fetchTasks: async (token?: string) => {
+    console.log("🚀 ~ fetchTasks: ~ token:", token, localStorage.getItem('token'))
     try {
-      const response = await fetch(uri + '/task');
+      const response = await fetch(uri + '/task', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token || localStorage.getItem('token')}`,
+        },
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

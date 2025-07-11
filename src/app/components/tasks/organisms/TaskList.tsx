@@ -15,7 +15,8 @@ export const TaskList = () => {
   
   useEffect(() => {
     // Fetch tasks when the component mounts
-    fetchTasks();
+    const token = localStorage.getItem('token') || '';
+    fetchTasks(token);
   }, [fetchTasks]);
   
   const handleFilter = (type: 'all' | 'active' | 'completed')=>{

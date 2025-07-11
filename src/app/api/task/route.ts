@@ -4,11 +4,19 @@ import Task from '../../../models/Task';
 import { getCurrentUserAction } from '../../actions/user';
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     try{
         await dbConnect()
-        const token = await getCurrentUserAction()
-        const tasks = await Task.find({ userId: token?.user_id }).sort({ createdAt: -1 }); // Sort by creation date, newest first
+        
+        const authHeader = request.headers.get('Authorization');
+    
+        let token : string = ''
+        
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            token = authHeader.substring(7); // Get the token part after "Bearer "
+        }
+        const payload = await getCurrentUserAction(token)
+        const tasks = await Task.find({ userId: payload?.user_id }).sort({ createdAt: -1 }); // Sort by creation date, newest first
         const response = NextResponse.json({data: tasks, message: 'Inicio de sesion exitoso', ok: true})
         return response
     } catch (error) {
