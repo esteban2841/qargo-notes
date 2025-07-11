@@ -33,8 +33,6 @@ interface Object3DRendererProps {
   name: string
 }
 
-const env = process.env.NEXT_PUBLIC_NODE_ENV
-
 export const Object3DRenderer = ({children, context, name}: Object3DRendererProps) => {
     const ref = useRef()
     const { helmet } = useContext(QargoCoffeeContext)

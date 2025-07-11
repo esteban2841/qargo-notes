@@ -4,7 +4,7 @@ import Task from '@/models/Task';
 import { getCurrentUserAction } from '@/app/actions/user';
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     try{
         await dbConnect()
         const token = await getCurrentUserAction()

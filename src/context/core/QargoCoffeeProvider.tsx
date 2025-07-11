@@ -1,8 +1,7 @@
 'use client'
-import React, { useReducer, useRef } from 'react'
-import { QargoCoffeeContext, User } from './QargoCoffeeContext';
+import React, { useReducer } from 'react'
+import { QargoCoffeeContext } from './QargoCoffeeContext';
 import { qargoCoffeeReducer } from './QargoCoffeeReducer';
-import { Helmet } from '@/types/helmet'
 import axios from 'axios';
 import { fetchDataSections } from '@/utils/qargoCommonFunctions';
 import { useRouter } from 'next/navigation';

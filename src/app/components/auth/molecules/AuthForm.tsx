@@ -15,12 +15,6 @@ export const AuthForm = () => {
     name: '',
   });
 
-  interface AuthFormData {
-    email: string;
-    password: string;
-    name: string;
-  }
-
   interface ApiResponse {
     status: number;
     [key: string]: any;
@@ -46,6 +40,7 @@ export const AuthForm = () => {
       }
     } catch (error: unknown) {
       const errorMessage = (error as any).response?.data?.message || 'Algo salio mal. Por favor intentelo de nuevo'
+      return errorMessage
     }
   };
 

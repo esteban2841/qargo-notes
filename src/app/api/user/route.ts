@@ -3,9 +3,7 @@ import {dbConnect} from '@/utils/mongodb'
 import { NextResponse, NextRequest } from 'next/server'
 
 
-const secret = process.env.SECRET;
-
-export async function POST(request: NextRequest, response: NextResponse){
+export async function POST(request: NextRequest){
     try{
         
         await dbConnect()
@@ -27,7 +25,7 @@ export async function POST(request: NextRequest, response: NextResponse){
 }
 export async function DELETE(request: NextRequest){
     try{
-        const mongoConnection = await dbConnect()
+        await dbConnect()
         const {user} = await request.json()
         const {_id, email} = user
         let deletedUser = await User.findOneAndDelete({_id})
@@ -42,7 +40,7 @@ export async function DELETE(request: NextRequest){
         return NextResponse.json({error: 'Internal server error'}, {status: 500})
     }
 }
-export async function GET(request: NextRequest, response: NextResponse){
+export async function GET(request: NextRequest){
     try{
         await dbConnect()
         const url = new URL(request.url);
