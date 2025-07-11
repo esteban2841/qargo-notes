@@ -6,6 +6,9 @@ import { Button } from "@/app/components/auth/atoms/Button";
 import { ChevronRight, Mail, Lock, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { fetchDataSections } from '@/utils/qargoCommonFunctions';
+
+const uri = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+
 export const AuthForm = () => {
   const router = useRouter();
   const { isLoginMode, toggleMode } = useContext(QargoCoffeeContext);
@@ -26,11 +29,11 @@ export const AuthForm = () => {
     try {
       console.log("🚀 ~ handleSubmit ~ isLoginMode:", isLoginMode)
       const registerResponse: ApiResponse = isLoginMode 
-        ? await fetchDataSections('http://localhost:3000/api', 'login', undefined, formData) 
-        : await fetchDataSections('http://localhost:3000/api', 'register', undefined, formData);
+        ? await fetchDataSections(uri, 'login', undefined, formData) 
+        : await fetchDataSections(uri, 'register', undefined, formData);
       console.log("🚀 ~ handleSubmit ~ registerResponse:", registerResponse)
       if(registerResponse.status == 200 && !isLoginMode){
-        const loginResponse: ApiResponse = await fetchDataSections('http://localhost:3000/api', 'login', undefined, formData) 
+        const loginResponse: ApiResponse = await fetchDataSections(uri, 'login', undefined, formData) 
         if(loginResponse.status == 200){
           router.push('/main')
         }
