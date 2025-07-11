@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 const allowedOrigins = [
     '*',
+    process.env.NEXT_PUBLIC_BASE_URL,
     'https://qargo-coffee.vercel.app',
     'qargo-coffee.vercel.app'
     // Puerto común para desarrollo de React Native

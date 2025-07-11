@@ -20,8 +20,8 @@ const ThreeDimentionContainerRenderer = styled.div`
     align-items: center;
     justify-content: start;
     position: relative;
-    height: 50vh;
     width: 50vw;
+    height: 40vh;
   }
 
   background-color: transparent;
