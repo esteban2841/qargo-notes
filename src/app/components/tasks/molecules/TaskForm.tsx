@@ -52,7 +52,12 @@ export const TaskForm = ({ task, onClose }: TaskFormProps) => {
     if (task) {
       updateTask(task._id, formData);
     } else {
-      addTask(formData);
+      addTask({
+        ...formData,
+        _id: '', // or generate a temporary id if needed
+        userId: '', // set the correct userId here
+        completed: false
+      });
     }
     
     onClose();

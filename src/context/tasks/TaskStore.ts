@@ -55,7 +55,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   },
 
   // Adds a new task
-  addTask: async (task: Omit<Task, "id" | "createdAt" | "updatedAt">) => {
+  addTask: async (task) => {
     try {
       const response = await fetch(uri + '/task', {
         method: 'POST',
