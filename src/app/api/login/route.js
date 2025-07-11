@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import User from '@/models/User'
 import {dbConnect} from '@/utils/mongodb'
 import { SignJWT } from 'jose'
-import { NextResponse, userAgent } from 'next/server'
+import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
 const secret = process.env.SECRET
@@ -60,6 +60,7 @@ export async function POST(request){
         return response
 
     }catch (error) {
+        console.error("🚀 ~ POST ~ error:", error)
         return NextResponse.json({message: 'Credenciales invalidas'}, {status: 500})
     }
 }

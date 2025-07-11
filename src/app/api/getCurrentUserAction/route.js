@@ -1,11 +1,7 @@
-import User from '@/models/User'
 import {dbConnect} from '@/utils/mongodb'
-import { jwtVerify } from 'jose'
 import { NextResponse, NextRequest } from 'next/server'
 import { getCurrentUserAction } from "@/app/actions/user";
 
-
-const secret = process.env.SECRET;
 
 export async function GET(request, response){
     try{

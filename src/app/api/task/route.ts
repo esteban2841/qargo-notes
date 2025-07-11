@@ -3,9 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import {dbConnect} from '@/utils/mongodb';
 import Task from '@/models/Task';
 import { getCurrentUserAction } from '@/app/actions/user';
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(request, response){
+export async function GET(request: NextRequest, response: NextResponse) {
     try{
         await dbConnect()
         const token = await getCurrentUserAction()
@@ -14,10 +14,10 @@ export async function GET(request, response){
         return response
     } catch (error) {
         console.error(error)
-        return response.json({message: 'Error recuperando la informacion del usuario', status: 500})
+        return NextResponse.json({message: 'Error recuperando la informacion del usuario', status: 500})
     }
 }
-export async function POST(request, response){
+export async function POST(request: NextRequest, response: NextResponse){
     try{
         await dbConnect()
         const token = await getCurrentUserAction()
@@ -39,7 +39,7 @@ export async function POST(request, response){
         return response
     } catch (error) {
         console.error(error)
-        return response.json({message: 'Error recuperando la informacion del usuario', status: 500})
+        return NextResponse.json({message: 'Error recuperando la informacion del usuario', status: 500})
     }
 }
 
