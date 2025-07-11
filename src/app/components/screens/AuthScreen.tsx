@@ -1,8 +1,8 @@
 
-import { Object3DRenderer } from "@/app/components/auth/molecules/Object3DRenderer";
-import { CoffeeCups } from "@/app/components/auth/atoms/CoffeeCups";
-import { AuthForm } from "@/app/components/auth/molecules/AuthForm";
-import { Hero } from "@/app/components/auth/organisms/Hero";
+import { Object3DRenderer } from "../../components/auth/molecules/Object3DRenderer";
+import { CoffeeCups } from "../../components/auth/atoms/CoffeeCups";
+import { AuthForm } from "../../components/auth/molecules/AuthForm";
+import { Hero } from "../../components/auth/organisms/Hero";
 
 const MODELS3D = [
   {

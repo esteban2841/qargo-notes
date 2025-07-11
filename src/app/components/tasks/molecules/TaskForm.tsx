@@ -1,6 +1,6 @@
 // components/molecules/TaskForm.tsx
 import { useState, useEffect } from 'react';
-import { Task } from '@/types';
+import { Task } from '../../../../types';
 import { Button } from '../atoms/Button';
 import { Input } from '../atoms/Input';
 import { useTaskStore } from '../../../../context/tasks/TaskStore';

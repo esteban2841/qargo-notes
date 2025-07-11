@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
-import User from '@/models/User'
-import {dbConnect} from '@/utils/mongodb'
+import User from '../../../models/User'
+import {dbConnect} from '../../../utils/mongodb'
 import { NextResponse } from 'next/server';
 
 

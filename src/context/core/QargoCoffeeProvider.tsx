@@ -3,7 +3,7 @@ import React, { useReducer } from 'react'
 import { QargoCoffeeContext } from './QargoCoffeeContext';
 import { qargoCoffeeReducer } from './QargoCoffeeReducer';
 import axios from 'axios';
-import { fetchDataSections } from '@/utils/qargoCommonFunctions';
+import { fetchDataSections } from '../../utils/qargoCommonFunctions';
 import { useRouter } from 'next/navigation';
 
 export interface SectionRef {

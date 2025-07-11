@@ -1,4 +1,4 @@
-import { getCurrentUser, getUserById } from '@/utils/serverUtils';
+import { getCurrentUser, getUserById } from '../../utils/serverUtils';
 
 export async function getCurrentUserAction(token?: string) {
     return await getCurrentUser(token)

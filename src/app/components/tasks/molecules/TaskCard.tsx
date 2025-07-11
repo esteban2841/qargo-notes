@@ -1,6 +1,6 @@
 
 // components/molecules/TaskCard.tsx
-import { Task } from '@/types';
+import { Task } from '../../../../types';
 import { Button } from '../atoms/Button';
 import { Badge } from '../atoms/Badge';
 import { useTaskStore } from '../../../../context/tasks/TaskStore';

@@ -1,6 +1,6 @@
 'use client'
 import { createContext } from 'react'
-import { Helmet } from '@/types/helmet'
+import { Helmet } from '../../types/helmet'
 
 export interface User {
     _id?: string

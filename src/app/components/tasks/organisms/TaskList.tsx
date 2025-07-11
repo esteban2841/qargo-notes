@@ -1,7 +1,7 @@
 'use client'
 // components/organisms/TaskList.tsx
 import { useEffect, useState } from 'react';
-import { Task } from '@/types';
+import { Task } from '../../../../types';
 import { TaskCard } from '../molecules/TaskCard';
 import { TaskForm } from '../molecules/TaskForm';
 import { Button } from '../atoms/Button';

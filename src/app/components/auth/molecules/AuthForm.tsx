@@ -1,11 +1,11 @@
 'use client'
 import {QargoCoffeeContext} from '../../../../context'
 import React, { useContext, useState } from 'react'
-import { Input } from "@/app/components/auth/atoms/Input";
-import { Button } from "@/app/components/auth/atoms/Button";
+import { Input } from "../atoms/Input";
+import { Button } from "../atoms/Button";
 import { ChevronRight, Mail, Lock, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { fetchDataSections } from '@/utils/qargoCommonFunctions';
+import { fetchDataSections } from '../../../../utils/qargoCommonFunctions';
 
 const uri = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 console.log("🚀 ~ uri:", uri)

@@ -1,8 +1,8 @@
 // pages/api/task/[id].ts
-import {dbConnect} from '@/utils/mongodb';
-import Task from '@/models/Task';
+import {dbConnect} from '../../../../utils/mongodb';
+import Task from '../../../../models/Task';
 import { NextRequest, NextResponse } from 'next/server';
-import { getCurrentUserAction } from '@/app/actions/user';
+import { getCurrentUserAction } from '../../../actions/user';
 
 export async function DELETE(request: NextRequest){
   try{

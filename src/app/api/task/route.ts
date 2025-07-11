@@ -1,7 +1,7 @@
 // pages/api/task/index.ts
-import {dbConnect} from '@/utils/mongodb';
-import Task from '@/models/Task';
-import { getCurrentUserAction } from '@/app/actions/user';
+import {dbConnect} from '../../../utils/mongodb';
+import Task from '../../../models/Task';
+import { getCurrentUserAction } from '../../actions/user';
 import { NextResponse, NextRequest } from 'next/server';
 
 export async function GET() {

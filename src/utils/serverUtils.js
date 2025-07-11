@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers'
 import { jwtVerify } from 'jose'
-import User from '@/models/User'
+import User from '../../../models/User'
 
 
 const secretKey = process.env.SECRET
