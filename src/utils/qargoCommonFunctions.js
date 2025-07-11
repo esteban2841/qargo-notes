@@ -27,7 +27,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'login'){
 
-        const res = await axios(`/login`, {
+        const res = await axios(`/api/login`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -46,7 +46,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'logout'){
 
-        const res = await axios(`/logout`, {
+        const res = await axios(`/api/logout`, {
             
             method: method || 'POST',
             credentials: 'include',
@@ -65,7 +65,7 @@ export const fetchDataSections =  async (url, endpoint, category, authToken, met
     }
     if(endpoint == 'clientes'|| endpoint == 'empleados' ){
 
-        const res = await axios(`/register`, {
+        const res = await axios(`/api/register`, {
             
             method: method || 'POST',
             credentials: 'include',
