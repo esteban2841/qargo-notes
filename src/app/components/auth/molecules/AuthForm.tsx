@@ -1,6 +1,6 @@
 'use client'
 import {QargoCoffeeContext} from '@/context'
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Input } from "@/app/components/auth/atoms/Input";
 import { Button } from "@/app/components/auth/atoms/Button";
 import { ChevronRight, Mail, Lock, User } from 'lucide-react';
