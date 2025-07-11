@@ -38,6 +38,7 @@ export async function middleware (request){
     }
     
     const path = request.nextUrl.pathname;
+    console.log("🚀 ~ middleware ~ path:", path)
     const isPublicPath = 
     path === '/' 
     || path === '/api/register' 
