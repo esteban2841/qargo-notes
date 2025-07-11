@@ -1,7 +1,7 @@
 // store/taskStore.ts
 'use client'
 import { create } from 'zustand';
-import { TaskStore } from '@/types'; // Make sure to import from your updated types file
+import { Task, TaskStore } from '@/types'; // Make sure to import from your updated types file
 
 const uri = process.env.NEXT_PUBLIC_BACKEND_URI;
 
@@ -55,14 +55,14 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   },
 
   // Adds a new task
-  addTask: async (taskData) => {
+  addTask: async (task: Omit<Task, "id" | "createdAt" | "updatedAt">) => {
     try {
       const response = await fetch(uri + '/task', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(taskData),
+        body: JSON.stringify(task),
       });
 
       if (!response.ok) {
