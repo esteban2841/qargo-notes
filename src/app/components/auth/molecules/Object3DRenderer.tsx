@@ -1,10 +1,9 @@
 'use client'
 
-import * as THREE from 'three'
-import {  Environment, OrbitControls, Stage } from "@react-three/drei";
+import {  OrbitControls, Stage } from "@react-three/drei";
 import { Canvas} from "@react-three/fiber"
 import styled from "styled-components";
-import { Suspense, useRef, useContext, useState } from "react";
+import { Suspense, useRef, useContext } from "react";
 import { Loader } from "../atoms/Loader";
 import { QargoCoffeeContext } from "@/context";
 
