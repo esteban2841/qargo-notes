@@ -8,12 +8,6 @@ import { User as UserType } from '@/context/core/QargoCoffeeContext'
 
 const secret = process.env.SECRET
 
-interface PayloadTokenCreation {
-    userId: string;
-    email: string;
-    user_id: string;
-}
-
 export async function POST(request: NextRequest){
     
     try{
@@ -21,7 +15,7 @@ export async function POST(request: NextRequest){
         const {email, password} = await request.json();
         if(!email || !password) NextResponse.json({message: 'Por favor provea sus credenciales'})
 
-        const user: UserType = await User.findOne({email})
+        const user: UserType = await User.findOne({email}) || {name: '', email: '', password: ''}
         const passwordDb = user.password
 
         if(!user) NextResponse.json({message: 'Credenciales invalidas'})
@@ -35,12 +29,12 @@ export async function POST(request: NextRequest){
             {
                 userId: user._id,
                 email: user.email,
-                user_id: user?._id.toString(),
-            } as PayloadTokenCreation
+                user_id: user && user._id ? user._id.toString() : "",
+            }
         ).setProtectedHeader({alg: 'HS256'}).setExpirationTime('1d').sign(jwtSecret);
 
 
-        const response = new NextResponse(JSON.stringify({payload: token, userId: token.userId, message: 'Éxito', status: 200 }), {
+        const response = new NextResponse(JSON.stringify({payload: token, userId: user._id, message: 'Éxito', status: 200 }), {
             status: 200,
             headers: {
                 'Access-Control-Allow-Origin': '*',
