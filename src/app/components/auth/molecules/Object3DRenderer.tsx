@@ -13,12 +13,11 @@ const ThreeDimentionContainerRenderer = styled.div`
   align-items: center;
   height: 50dvh;
   width: 50vw;
-  top: 60px;
   position: relative;
   right: 0;
   @media (max-width: 700px) {
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     position: relative;
     width: 50vw;
     height: 40vh;

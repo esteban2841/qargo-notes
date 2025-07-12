@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs'
 import User from '../../../models/User'
 import {dbConnect} from '../../../utils/mongodb'
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 
-export async function POST(request){
+export async function POST(request: NextRequest){
     await dbConnect()
     const {email, password, name  } = await request.json();
 

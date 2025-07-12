@@ -4,7 +4,6 @@ import { cookies } from 'next/headers'
 export async function GET(){
     try{
         // Aquí podrías realizar alguna lógica adicional si es necesario
-        console.log("🚀 ~ cookies ~ process.env.NEXT_PUBLIC_BASE_URL:", process.env.NEXT_PUBLIC_BASE_URL)
         const response = new NextResponse(JSON.stringify({ status:200, message: 'Cerraste sesion exitosamente' }), {
             status: 200,
             headers: {

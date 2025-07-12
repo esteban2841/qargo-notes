@@ -2,20 +2,26 @@ import bcrypt from 'bcryptjs'
 import User from '../../../models/User'
 import {dbConnect} from '../../../utils/mongodb'
 import { SignJWT } from 'jose'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+import { User as UserType } from '@/context/core/QargoCoffeeContext'
 
 const secret = process.env.SECRET
-console.log("🚀 ~ cookies ~ process.env.PROD_DOMAIN:", process.env.PROD_DOMAIN)
 
-export async function POST(request){
+interface PayloadTokenCreation {
+    userId: string;
+    email: string;
+    user_id: string;
+}
+
+export async function POST(request: NextRequest){
     
     try{
         await dbConnect()
         const {email, password} = await request.json();
         if(!email || !password) NextResponse.json({message: 'Por favor provea sus credenciales'})
 
-        const user = await User.findOne({email})
+        const user: UserType = await User.findOne({email})
         const passwordDb = user.password
 
         if(!user) NextResponse.json({message: 'Credenciales invalidas'})
@@ -25,11 +31,13 @@ export async function POST(request){
         if(!isPasswordValid) return NextResponse.json({message: 'Credenciales invalidas'}, {status: 400})
         
         const jwtSecret = new TextEncoder().encode(secret)
-        const token = await new SignJWT({
-            userId: user._id,
-            email: user.email,
-            user_id: user._id.toString(),
-        }).setProtectedHeader({alg: 'HS256'}).setExpirationTime('1d').sign(jwtSecret);
+        const token = await new SignJWT(
+            {
+                userId: user._id,
+                email: user.email,
+                user_id: user?._id.toString(),
+            } as PayloadTokenCreation
+        ).setProtectedHeader({alg: 'HS256'}).setExpirationTime('1d').sign(jwtSecret);
 
 
         const response = new NextResponse(JSON.stringify({payload: token, userId: token.userId, message: 'Éxito', status: 200 }), {
